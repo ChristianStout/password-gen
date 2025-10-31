@@ -1,2 +1,2 @@
 # password-gen
-A way to generate secure, yet usable passwords.
+A way to generate secure, yet memorable passwords.
