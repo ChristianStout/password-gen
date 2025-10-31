@@ -12,15 +12,25 @@ const WORDS = [
     "sort",
     "of",
     "the",
-    "cirlce",
+    "circle",
     "central",
     "hand",
     "fist",
     "lift",
     "double",
     "wrench",
-    "arch"
-    // and so on
+    "arch",
+    "summer",
+    "spring",
+    "fall",
+    "brink",
+    "total",
+    "figure",
+    "let",
+    "go",
+    "hard",
+    "soft"
+    // and so on...
 ];
 
 const SYMBOLS = [
@@ -37,22 +47,28 @@ function get_random_int(max) {
     return Math.floor(Math.random() * max)
 }
 
-function next_word(so_far, num_symbols, length) {
+function next_word(so_far, num_symbols, length, capitalize_word) {
     let random_int = get_random_int(WORDS.length);
     if (((so_far + WORDS[random_int]).length + num_symbols) > length) {
         return next_word(so_far, num_symbols, length);
     }
-    return so_far + WORDS[random_int];
+    let word = WORDS[random_int];
+    if (capitalize_word) {
+        word = word[0].toUpperCase() + word.slice(1);
+        // console.log(word);
+        // console.log(word[0].toUpperCase())
+    }
+    return so_far + word;
 }
 
 function insert_in_str(string, what, where) {
     return string.slice(0, where) + what + string.slice(where);
 }
 
-function make_password(num_words, num_symbols, length, symbols=SYMBOLS, allow_repeat=false) {
+function make_password(num_words, num_symbols, length, symbols=SYMBOLS, allow_repeat=false, capitalize_word=true) {
     let password = "";
     for (let i = 0; i < num_words; i++) {
-        password = next_word(password, num_symbols, length)
+        password = next_word(password, num_symbols, length, capitalize_word)
     }
 
     for (let i = 0; i < num_symbols; i++) {
@@ -67,7 +83,7 @@ function make_password(num_words, num_symbols, length, symbols=SYMBOLS, allow_re
 
 function main() {
     for (let i = 0; i < 5; i++) {
-        console.log(make_password(4, 2, 50));
+        console.log(make_password(4, 3, 50));
     }
 }
 
